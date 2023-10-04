@@ -1,9 +1,45 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import logo from './logo.png';
 import './App.css';
 import Card from './components/card';
 
 function App() {
+
+  const [weatherData, setWeatherData] = useState([]);
+  const apiKey = "e3fee7cef45997315031fdd443f662ff";
+  const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+  const units = "metric";
+
+ 
+
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      const jsonFileUrl = '';
+      const response = await fetch(jsonFileUrl);
+      const jsonData = await response.json();
+      const citycodes = jsonData.List.map(city => city.CityCode);
+
+      const weatherPromises = citycodes.map(cityCode => {
+        const requestUrl = `${apiUrl}?id=${cityCode}&appid=${apiKey}&units=${units}`;
+
+        return axios.get(requestUrl)
+          .then(response => response.data)
+          .catch(error => {
+            console.error('Error fetching weather data:', error);
+            return null;
+          });
+      });
+
+      Promise.all(weatherPromises).then(weatherDataArray => {
+        setWeatherData(weatherDataArray.filter(data => data !== null));
+      });
+    };
+
+    fetchWeatherData();
+  }, [apiKey]);
+
+  
   return (
     
     <div className='app'>
@@ -29,7 +65,10 @@ function App() {
 
       <div className='card-container'>
 
-          <Card/>
+        {weatherData.map((weatherDataItem, index) => (
+        <Card key={index} data={weatherDataItem} />
+        )
+        )}
       </div>
 
 
