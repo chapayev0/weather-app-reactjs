@@ -3,6 +3,9 @@ import axios from 'axios';
 import logo from './logo.png';
 import './App.css';
 import Card from './components/card';
+import JData from './cities.json'
+import jsonData from './data.json';
+
 
 function App() {
 
@@ -10,37 +13,50 @@ function App() {
   const apiKey = "e3fee7cef45997315031fdd443f662ff";
   const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
   const units = "metric";
+  const citycodes = "sfsf";
 
  
-
+  
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const jsonFileUrl = '';
-      const response = await fetch(jsonFileUrl);
-      const jsonData = await response.json();
-      const citycodes = jsonData.List.map(city => city.CityCode);
+      try {
+        // Access the List array from the JSON data
+        const { List } = jsonData;
 
-      const weatherPromises = citycodes.map(cityCode => {
-        const requestUrl = `${apiUrl}?id=${cityCode}&appid=${apiKey}&units=${units}`;
+        // Extract city IDs and store them in an array
+        const cityIds = List.map(city => city.CityCode);
 
-        return axios.get(requestUrl)
-          .then(response => response.data)
-          .catch(error => {
-            console.error('Error fetching weather data:', error);
-            return null;
-          });
-      });
+        // Fetch weather data for each city
+        const weatherPromises = cityIds.map(cityId => {
+          const requestUrl = `${apiUrl}?id=${cityId}&appid=${apiKey}&units=${units}`;
 
-      Promise.all(weatherPromises).then(weatherDataArray => {
-        setWeatherData(weatherDataArray.filter(data => data !== null));
-      });
+          return axios.get(requestUrl)
+            .then(response => response.data)
+            .catch(error => {
+              console.error(`Error fetching weather data for city ${cityId}:`, error);
+              return null;
+            });
+        });
+
+        // Wait for all weather data requests to complete
+        const weatherDataArray = await Promise.all(weatherPromises);
+
+        // Filter out any null values from the responses
+        const filteredWeatherData = weatherDataArray.filter(data => data !== null);
+
+        // Set the weather data in the state
+        setWeatherData(filteredWeatherData);
+      } catch (error) {
+        console.error('Error fetching and processing data:', error);
+      }
     };
 
+    // Call the fetchWeatherData function when the component mounts
     fetchWeatherData();
   }, [apiKey]);
 
-  
   return (
+    
     
     <div className='app'>
 
@@ -55,8 +71,8 @@ function App() {
 
         <div className='inp-contents'>
 
-          <input type="text" class="form-control" placeholder="Enter a city"/>
-          <button type="button" class="btn btn-primary btn-add-city">Add City</button>
+          <input type="text" className="form-control" placeholder="Enter a city"/>
+          <button type="button" className="btn btn-primary btn-add-city">Add City</button>
 
         </div>
 
@@ -65,7 +81,22 @@ function App() {
 
       <div className='card-container'>
 
+      <div>
+      
+  
+
+  </div>
+
+
+        <p>
+
+          {citycodes}
+        </p>
+
+
+
         {weatherData.map((weatherDataItem, index) => (
+
         <Card key={index} data={weatherDataItem} />
         )
         )}

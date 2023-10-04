@@ -17,6 +17,8 @@ const Card = ({ data }) => {
       name: city,
       sys: { country },
     } = data;
+
+
   
     const sunriseDate = new Date(sunrise * 1000);
     const format_sunrise = sunriseDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -83,10 +85,8 @@ const Card = ({ data }) => {
             <div class="col-sm-2 text-right"> 
         
             
-                <div style="position: absolute; top: -15px; right: 18px;">
-                    <button style="width: 20px; height: 20px; background: none;   background-image: url('img/close.png'); 
-                    background-size: cover;
-                    background-repeat: no-repeat; border:none;"></button>
+                <div>
+                    <button ></button>
                 </div>
         
             </div>
@@ -102,10 +102,10 @@ const Card = ({ data }) => {
                 </div>
         
                 <div class="text-center">
-                    <div class="d-flex align-items-center location" style="display:flex;  padding-left: 30px;">${city}, ${country}</div>
-                    <div class="d-flex align-items-center datetime" style="display:flex; padding-left: 40px;">${date_time}</div>
-                    <div class="d-flex align-items-center datetime" style="padding-left: 10px;">
-                        <div class="weather-indicate-image" style="display:contents; justify-content: center; align-items:center; text-align:center; padding-left: 10px;"><img src="${ico_path}" alt=""/></div>
+                    <div class="d-flex align-items-center location" >${city}, ${country}</div>
+                    <div class="d-flex align-items-center datetime" >${date_time}</div>
+                    <div class="d-flex align-items-center datetime" >
+                        <div class="weather-indicate-image"><img src="${ico_path}" alt=""/></div>
                         <div class="weather">${description}</div>
                     </div>
                 </div>
@@ -113,10 +113,10 @@ const Card = ({ data }) => {
         
             <div class="col-sm-6 align-middle order-2 order-md-2"> 
         
-                <div class="text-center" style=" font-size: 28px; text-align: center;">
+                <div class="text-center" >
                     <div class="temperature">${temp}&#176C</div>
-                    <div class="man-temp" style=" font-size: 10px; text-align: center;">Temp Min: ${temp_min} &#176 C</div>
-                    <div class="mix-temp" style=" font-size: 10px; text-align: center;">Temp Max: ${temp_max} &#176 C</div>
+                    <div class="man-temp" >Temp Min: ${temp_min} &#176 C</div>
+                    <div class="mix-temp" >Temp Max: ${temp_max} &#176 C</div>
                 </div>
             </div>
         </div>
