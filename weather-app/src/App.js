@@ -4,7 +4,7 @@ import logo from './logo.png';
 import './App.css';
 import Card from './components/card';
 import JData from './cities.json'
-import jsonData from './data.json';
+import jsonData from './cities.json';
 
 
 function App() {
@@ -20,13 +20,12 @@ function App() {
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-        // Access the List array from the JSON data
+      
         const { List } = jsonData;
 
-        // Extract city IDs and store them in an array
+
         const cityIds = List.map(city => city.CityCode);
 
-        // Fetch weather data for each city
         const weatherPromises = cityIds.map(cityId => {
           const requestUrl = `${apiUrl}?id=${cityId}&appid=${apiKey}&units=${units}`;
 
@@ -38,81 +37,76 @@ function App() {
             });
         });
 
-        // Wait for all weather data requests to complete
+
         const weatherDataArray = await Promise.all(weatherPromises);
 
-        // Filter out any null values from the responses
+     
         const filteredWeatherData = weatherDataArray.filter(data => data !== null);
 
-        // Set the weather data in the state
+       
         setWeatherData(filteredWeatherData);
       } catch (error) {
         console.error('Error fetching and processing data:', error);
       }
     };
 
-    // Call the fetchWeatherData function when the component mounts
+   
     fetchWeatherData();
   }, [apiKey]);
 
   return (
-    
-    
-    <div className='app'>
 
-      <div className='logo'>
 
-        <img src={logo} className="App-logo" alt="logo" />
-        <h3> &nbsp; Weather App</h3>
-            
-      </div>
+    <body>
 
-      <div className='inp'>
+        <div className='app'>
 
-        <div className='inp-contents'>
+        <div className='logo'>
 
-          <input type="text" className="form-control" placeholder="Enter a city"/>
-          <button type="button" className="btn btn-primary btn-add-city">Add City</button>
+          <img src={logo} className="App-logo" alt="logo" />
+          <h3> &nbsp; Weather App</h3>
+              
+        </div>
+
+        <div className='inp'>
+
+          <div className='inp-contents'>
+
+            <input type="text" className="form-control" placeholder="Enter a city"/>
+            <button type="button" className="btn btn-primary btn-add-city">Add City</button>
+
+          </div>
+
 
         </div>
 
-
-      </div>
-
-      <div className='card-container'>
-
-      <div>
-      
-  
-
-  </div>
+        <div className='card-container'>
 
 
-        <p>
+          {weatherData.map((weatherDataItem, index) => (
 
-          {citycodes}
-        </p>
+          <Card key={index} data={weatherDataItem} />
+          )
+          )}
+        </div>
 
 
 
-        {weatherData.map((weatherDataItem, index) => (
+        <footer>
+        <div className="container">
+          <p>&copy; 2023 Fidenz Technologies</p>
+        </div>
+        </footer>
 
-        <Card key={index} data={weatherDataItem} />
-        )
-        )}
-      </div>
+
+</div>
 
 
       
-    <footer>
-      <div className="container">
-        <p>&copy; 2023 Fidenz Technologies</p>
-      </div>
-    </footer>
-
-
-    </div>
-
+    </body>
+    
+    
+    
 
 
 

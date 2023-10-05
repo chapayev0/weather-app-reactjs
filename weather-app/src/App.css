@@ -1,12 +1,30 @@
 
-.app {
-  background-image: url('img/back.jpg'); 
-  background-size: cover;
+body {
+
+  background-image: url('img/back.jpg');
+  background-size: cover; /* Adjusted */
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; 
   height: 100vh;
+  background-color: #1F2128;
+
 }
+
+.card-container{
+  column-gap: 20px; 
+  display: flex;
+  justify-content: center;
+
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.app{
+
+  padding-bottom: 50px;
+}
+
+
 footer {
   position: fixed;
   bottom: 0;
