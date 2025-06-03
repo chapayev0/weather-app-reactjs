@@ -8,7 +8,7 @@ A simple and responsive weather web application built using **React.js** and the
 
 ## 📸 Screenshot
 
-![Weather App Screenshot](./screenshot.png) <!-- Optional: include a screenshot of your app -->
+![Weather App Screenshot](./weather-app-screanshot.PNG) <!-- Optional: include a screenshot of your app -->
 
 ---
 
