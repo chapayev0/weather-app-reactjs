@@ -94,7 +94,7 @@ function App() {
 
         <footer>
         <div className="container">
-          <p>&copy; 2023 Chapayev</p>
+          <p>&copy; 2023 Chapayev0</p>
         </div>
         </footer>
 
