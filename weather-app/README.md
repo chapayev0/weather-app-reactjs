@@ -27,7 +27,7 @@ A simple and responsive weather web application built using **React.js** and the
 - React.js (Functional Components + Hooks)
 - OpenWeather API
 - Axios for HTTP requests
-- CSS / Tailwind / Bootstrap (choose what you used)
+- CSS / Bootstrap (choose what you used)
 - (Optional: Geolocation API for auto-detection)
 
 ---
@@ -37,5 +37,5 @@ A simple and responsive weather web application built using **React.js** and the
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/react-weather-app.git
-cd react-weather-app
+https://github.com/chapayev0/weather-app-reactjs.git
+cd weather-app-reactjs
