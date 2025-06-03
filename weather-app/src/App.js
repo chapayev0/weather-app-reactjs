@@ -94,7 +94,7 @@ function App() {
 
         <footer>
         <div className="container">
-          <p>&copy; 2023 Fidenz Technologies</p>
+          <p>&copy; 2023 Chapayev</p>
         </div>
         </footer>
 
