@@ -4,7 +4,7 @@ A simple and responsive weather web application built using **React.js** and the
 
 ## 🔗 Live Demo
 
-[Click here to view the live app](#) <!-- Replace with your deployed URL if available -->
+[Click here to view the live app](https://weather-app-reactjs-jsz5.vercel.app/) <!-- Replace with your deployed URL if available -->
 
 ## 📸 Screenshot
 
